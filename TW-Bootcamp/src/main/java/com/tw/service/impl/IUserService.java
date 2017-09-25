@@ -1,10 +1,10 @@
 package com.tw.service.impl;
 
-import com.tw.response.UserInfo;
+import com.tw.entity.Users;
 
 public interface IUserService {
 
-    UserInfo getUserLoginInfo(String username, String password);
+	Users getUserLoginInfo(String username, String password);
     
     // this is test
 }

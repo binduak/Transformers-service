@@ -2,7 +2,6 @@ package com.tw.dao.impl;
 
 import javax.persistence.Query;
 
-import com.tw.response.UserInfo;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -34,7 +33,7 @@ public class UserDAOImpl extends AbstractEntityDAOImpl <Users, Long> implements 
 
 
 	@Override
-	public UserInfo getUserLoginInfo(String username, String password) {
+	public Users getUserLoginInfo(String username, String password) {
 		try {
 			//Need to make a call for the named query
 			Query getLoggedInUserQuery = getEntityManager().createNamedQuery("getUserLoginInfo");
@@ -48,7 +47,7 @@ public class UserDAOImpl extends AbstractEntityDAOImpl <Users, Long> implements 
 
 				// Login Is Successful
 				log.debug(ApplicationUtility.EXIT_METHOD + "validateUserLogin");
-				return new UserInfo(loggedInUser.getName(), loggedInUser.getEmailId(),loggedInUser.getUsername(),loggedInUser.getAddress(),loggedInUser.getMobileNumber());
+				return loggedInUser;
 		} catch (DataAccessException exception) {
 			log.error(exception);
 			throw new DAOException(TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_MESSAGE

@@ -1,6 +1,5 @@
 package com.tw.controller;
 
-import com.tw.response.UserInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.tw.entity.Users;
 import com.tw.request.LoginRequest;
 import com.tw.response.BaseResponse;
+import com.tw.response.UserInfoResponse;
 import com.tw.service.impl.IUserService;
 
 //@RequestMapping("user")
@@ -27,12 +28,12 @@ public class UserInfoController {
 	
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ResponseEntity<BaseResponse<UserInfo>> validateLogin(@RequestBody LoginRequest login) {
+	public ResponseEntity<BaseResponse<UserInfoResponse>> validateLogin(@RequestBody LoginRequest login) {
 
-		BaseResponse<UserInfo> returnSucessResponse = new BaseResponse<>();
-		UserInfo userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
+		BaseResponse<UserInfoResponse> returnSucessResponse = new BaseResponse<>();
+		Users userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
 		if (userInfo !=null) {
-			returnSucessResponse.setData(userInfo);
+			returnSucessResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber()));
 			returnSucessResponse.setSucessResponse();
 		}else{
 			returnSucessResponse.setData(null);
