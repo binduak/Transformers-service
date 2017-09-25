@@ -31,6 +31,7 @@ public class Users extends AbstractEntity<Long>{
 	private String password;
 	@Column(name = "address")
 	private String address;
+	
 	@Column(name = "mobile_number")
 	private String mobileNumber;
 	

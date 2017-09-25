@@ -30,4 +30,7 @@ public class TakeAwayApplicationExceptionUtlility {
 	public static final int INVALID_USERINFO_DATABASE_ERROR_CODE = 1008;
 	public static final String INVALID_USERINFO_DATABASE_ERROR_MESSAGE ="Please contact the Admin.The details are inconsistent";
 	
+	public static final int USERNAME_OR_EMAILID_EXISTS_ERROR_CODE = 1009;
+	public static final String USERNAME_OR_EMAILID_EXISTS_ERROR_MESSAGE ="Username or Emailid already exist in the repo";
+	
 }
