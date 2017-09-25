@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @NamedQueries({	
-	@NamedQuery(name="validateUserLoginInfo", query="select count(*) from Users u where u.username = :username and u.password= :password"),
+		@NamedQuery(name = "getUserLoginInfo", query = "from Users u where u.username = :username and u.password = :password"),
 })
 
 @Entity

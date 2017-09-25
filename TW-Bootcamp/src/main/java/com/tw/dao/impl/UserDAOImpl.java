@@ -2,6 +2,7 @@ package com.tw.dao.impl;
 
 import javax.persistence.Query;
 
+import com.tw.response.UserInfo;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -30,29 +31,24 @@ public class UserDAOImpl extends AbstractEntityDAOImpl <Users, Long> implements 
 		
 		log.debug(ApplicationUtility.EXIT_METHOD + "saveUser");
 	}
-	
+
+
 	@Override
-	public boolean validateUserLogin (String username, String password) {
-		log.debug(ApplicationUtility.ENTER_METHOD  + "saveUser");
+	public UserInfo getUserLoginInfo(String username, String password) {
 		try {
 			//Need to make a call for the named query
-			Query loginValidationQuery = getEntityManager().createNamedQuery("validateUserLoginInfo");
-			loginValidationQuery.setParameter("username", username);
-			loginValidationQuery.setParameter("password", password);
-			int intValue = ((Number) loginValidationQuery.getSingleResult()).intValue();
-			if (intValue ==0) {
+			Query getLoggedInUserQuery = getEntityManager().createNamedQuery("getUserLoginInfo");
+			getLoggedInUserQuery.setParameter("username", username);
+			getLoggedInUserQuery.setParameter("password", password);
+			Users loggedInUser = (Users) getLoggedInUserQuery.getSingleResult();
+			if (loggedInUser == null)
 				// Throw error invalid user
 				throw new DAOException(TakeAwayApplicationExceptionUtlility.INVALID_USER_LOGIN_ERROR_MESSAGE,
 						TakeAwayApplicationExceptionUtlility.INVALID_USER_LOGIN_ERROR_CODE);
-			}else if (intValue ==1){
-				// Login Is Sucessfull
+
+				// Login Is Successful
 				log.debug(ApplicationUtility.EXIT_METHOD + "validateUserLogin");
-				return true;
-			}else {
-				// Need to raise error to contact the admin. Since duplicate record
-				throw new DAOException(TakeAwayApplicationExceptionUtlility.INVALID_USERINFO_DATABASE_ERROR_MESSAGE,
-						TakeAwayApplicationExceptionUtlility.INVALID_USERINFO_DATABASE_ERROR_CODE);
-			}
+				return new UserInfo(loggedInUser.getName(), loggedInUser.getEmailId(),loggedInUser.getUsername(),loggedInUser.getAddress(),loggedInUser.getMobileNumber());
 		} catch (DataAccessException exception) {
 			log.error(exception);
 			throw new DAOException(TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_MESSAGE

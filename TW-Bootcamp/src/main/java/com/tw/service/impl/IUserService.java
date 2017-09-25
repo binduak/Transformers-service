@@ -1,9 +1,8 @@
 package com.tw.service.impl;
 
-import javax.transaction.Transactional;
+import com.tw.response.UserInfo;
 
 public interface IUserService {
 
-	boolean validateUserLogin(String username, String password);
-
+    UserInfo getUserLoginInfo(String username, String password);
 }

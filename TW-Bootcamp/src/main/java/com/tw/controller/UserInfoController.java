@@ -1,12 +1,12 @@
 package com.tw.controller;
 
+import com.tw.response.UserInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,25 +25,27 @@ public class UserInfoController {
 	@Autowired
 	private IUserService userService;
 	
-	 @RequestMapping(value = "login", method = RequestMethod.POST)
-	public ResponseEntity<BaseResponse<String>> validateLogin(@RequestBody LoginRequest login) {
-		
-		BaseResponse<String> returnSucessResponse = new BaseResponse<String>();
-		if (userService.validateUserLogin(login.getUsername(), login.getPassword())) {
-			returnSucessResponse.setData("User Logged In Sucessfully");
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public ResponseEntity<BaseResponse<UserInfo>> validateLogin(@RequestBody LoginRequest login) {
+
+		BaseResponse<UserInfo> returnSucessResponse = new BaseResponse<>();
+		UserInfo userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
+		if (userInfo !=null) {
+			returnSucessResponse.setData(userInfo);
 			returnSucessResponse.setSucessResponse();
 		}else{
-			returnSucessResponse.setData("Invalid Username Or Password");
+			returnSucessResponse.setData(null);
 			returnSucessResponse.setFailureResponse();
 		}
-		return new ResponseEntity<BaseResponse<String>>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
 	}
-	 
-	 
-	 @GetMapping("logout/{username}")
+
+
+	@GetMapping("logout/{username}")
 		public ResponseEntity<BaseResponse<String>> logoutUser(@PathVariable("username") String username) {
 			
-			BaseResponse<String> returnSucessResponse = new BaseResponse<String>();
+			BaseResponse<String> returnSucessResponse = new BaseResponse<>();
 			if (username.equalsIgnoreCase("123")) {
 				returnSucessResponse.setData("User Logged Out Sucessfully");
 				returnSucessResponse.setSucessResponse();
@@ -51,6 +53,6 @@ public class UserInfoController {
 				returnSucessResponse.setData("Invalid Username to Logout");
 				returnSucessResponse.setFailureResponse();
 			}
-			return new ResponseEntity<BaseResponse<String>>(returnSucessResponse, HttpStatus.OK);
+			return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
 		}
 }
