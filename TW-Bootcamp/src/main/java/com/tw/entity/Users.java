@@ -23,7 +23,7 @@ public class Users extends AbstractEntity<Long>{
 	private long userId;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "emailId")
+	@Column(name = "email_id")
 	private String emailId;
 	@Column(name = "username", unique = true)
 	private String username;
@@ -31,7 +31,7 @@ public class Users extends AbstractEntity<Long>{
 	private String password;
 	@Column(name = "address")
 	private String address;
-	@Column(name = "mobileNumber")
+	@Column(name = "mobile_number")
 	private String mobileNumber;
 	
 	public long getUserId() {
