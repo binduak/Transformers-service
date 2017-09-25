@@ -8,9 +8,13 @@ public class ApplicationUtility {
 	
 	
 	public static final String RESPONSE_SUCESS_MESSAGE = "Sucess";
-	public static final int RESPONSE_SUCESS_CODE = 1000;
+	public static final int RESPONSE_SUCESS_CODE = 0;
 	
 	public static final String RESPONSE_FAILURE_MESSAGE = "Failure";
 	public static final int RESPONSE_FAILURE_CODE = 400;
 	
+	public static boolean validateEmptyString (String toValidate) {
+		if (toValidate!=null && toValidate.trim().length()>0) 	return true;
+		return false;
+	}
 }
