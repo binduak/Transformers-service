@@ -1,12 +1,15 @@
 package com.tw.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @NamedQueries({	
@@ -33,6 +36,8 @@ public class Users extends AbstractEntity<Long>{
 	private String address;
 	@Column(name = "mobile_number")
 	private String mobileNumber;
+	@OneToOne(mappedBy = "buyerUserInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Buyer buyerInfo;
 	
 	public long getUserId() {
 		return userId;
@@ -75,6 +80,12 @@ public class Users extends AbstractEntity<Long>{
 	}
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+	public Buyer getBuyerInfo() {
+		return buyerInfo;
+	}
+	public void setBuyerInfo(Buyer buyerInfo) {
+		this.buyerInfo = buyerInfo;
 	}
 	
 	

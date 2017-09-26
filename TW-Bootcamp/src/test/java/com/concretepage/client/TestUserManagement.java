@@ -2,8 +2,6 @@ package com.concretepage.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Date;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,7 +24,7 @@ public class TestUserManagement {
 	final String REGISTER_BUYER_URL =  BASE_URL + "registerBuyer";
 	final String REGISTER_SELLER_URL =  BASE_URL + "registerSeller";
 	
-	public void testUserValidLogin() {
+	public void testBuyerValidLogin() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		RestTemplate restTemplate = new RestTemplate();
@@ -34,9 +32,20 @@ public class TestUserManagement {
 		loginRequest.setUsername("1$tw");
 		loginRequest.setPassword("123456");
 		BaseResponse<UserInfoResponse> loginResponse = restTemplate.postForObject(LOGIN_URL, loginRequest, BaseResponse.class);
-		System.out.println("getData"+loginResponse.getData());
-		assertThat(loginResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(loginResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(loginResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(loginResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
+	}
+	
+	public void testSellerValidLogin() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		RestTemplate restTemplate = new RestTemplate();
+		LoginRequest loginRequest = new LoginRequest();
+		loginRequest.setUsername("6$tw");
+		loginRequest.setPassword("123456");
+		BaseResponse<UserInfoResponse> loginResponse = restTemplate.postForObject(LOGIN_URL, loginRequest, BaseResponse.class);
+		assertThat(loginResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(loginResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 	}
 
 	public void testUserInValidLogin() {
@@ -65,8 +74,8 @@ public class TestUserManagement {
 		            new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
 		BaseResponse<Boolean> userPresenceResponse= restTemplate.postForObject(IS_USERNAME_OR_EMAIL_PRESENT_URL, entity, BaseResponse.class);
 		System.out.println("getData"+userPresenceResponse.getData());
-		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(userPresenceResponse.getData()).isTrue();
 	}
 	
@@ -82,8 +91,8 @@ public class TestUserManagement {
 		            new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
 		BaseResponse<Boolean> userPresenceResponse= restTemplate.postForObject(IS_USERNAME_OR_EMAIL_PRESENT_URL, entity, BaseResponse.class);
 		System.out.println("getData"+userPresenceResponse.getData());
-		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(userPresenceResponse.getData()).isFalse();
 	}
 	
@@ -98,8 +107,8 @@ public class TestUserManagement {
 		            new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
 		BaseResponse<Boolean> userPresenceResponse= restTemplate.postForObject(IS_USERNAME_OR_EMAIL_PRESENT_URL, entity, BaseResponse.class);
 		System.out.println("getData"+userPresenceResponse.getData());
-		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(userPresenceResponse.getData()).isFalse();
 	}
 	
@@ -115,8 +124,8 @@ public class TestUserManagement {
 		            new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
 		BaseResponse<Boolean> userPresenceResponse= restTemplate.postForObject(IS_USERNAME_OR_EMAIL_PRESENT_URL, entity, BaseResponse.class);
 		System.out.println("getData"+userPresenceResponse.getData());
-		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(userPresenceResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(userPresenceResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(userPresenceResponse.getData()).isTrue();
 	}
 	
@@ -129,14 +138,14 @@ public class TestUserManagement {
 		registerBuyerRequest.setUsername(NEW_BUYER+"name");
 		registerBuyerRequest.setPassword("123456");
 		registerBuyerRequest.setEmailId(NEW_BUYER+"@gsdf.com");
-		registerBuyerRequest.setDateOfBirth(new Date());
+		registerBuyerRequest.setDateOfBirth("2017-02-20");
 		registerBuyerRequest.setGender("M");
 		registerBuyerRequest.setMobileNumber("12345678");
 		registerBuyerRequest.setName(NEW_BUYER+ "name");
 		registerBuyerRequest.setAddress(NEW_BUYER+"Gachiboli Hyderbad");
 		BaseResponse<Boolean> registerBuyerResponse = restTemplate.postForObject(REGISTER_BUYER_URL, registerBuyerRequest, BaseResponse.class);
-		assertThat(registerBuyerResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(registerBuyerResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(registerBuyerResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(registerBuyerResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(registerBuyerResponse.getData()).isTrue();
 	}
 	
@@ -149,7 +158,7 @@ public class TestUserManagement {
 		registerBuyerRequest.setUsername("1$tw");
 		registerBuyerRequest.setPassword("123456");
 		registerBuyerRequest.setEmailId(INVALIDBUYER+"@gsdf.com");
-		registerBuyerRequest.setDateOfBirth(new Date());
+		registerBuyerRequest.setDateOfBirth("2017-12-23");
 		registerBuyerRequest.setGender("M");
 		registerBuyerRequest.setMobileNumber("12345678");
 		registerBuyerRequest.setName(INVALIDBUYER+ "name");
@@ -176,21 +185,22 @@ public class TestUserManagement {
 		registerSellerRequest.setName(NEW_SELLER+ "name");
 		registerSellerRequest.setAddress(NEW_SELLER+"Gachiboli Hyderbad");
 		BaseResponse<Boolean> registerBuyerResponse = restTemplate.postForObject(REGISTER_SELLER_URL, registerSellerRequest, BaseResponse.class);
-		assertThat(registerBuyerResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(registerBuyerResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(registerBuyerResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(registerBuyerResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(registerBuyerResponse.getData()).isTrue();
 	}
 
 	public static void main(String args[]) {
 		TestUserManagement userManageTest = new TestUserManagement();
-		userManageTest.testUserValidLogin();
+		/*userManageTest.testBuyerValidLogin();
+		userManageTest.testSellerValidLogin();
 		userManageTest.testUserInValidLogin();
 		userManageTest.testValidUsernameAndEmailIdPresent ();
 		userManageTest.testInValidUsernamePresent();
 		userManageTest.testInValidEmailIdPresent ();
 		userManageTest.testInValidUserNameOrValidEmailIdPresent();
-		userManageTest.testCreateValidBuyer();
 		userManageTest.testInValidBuyerDuplicateEmailId();
-		userManageTest.testCreateValidSeller();
+		userManageTest.testCreateValidSeller();*/
+		userManageTest.testCreateValidBuyer();
 	}
 }

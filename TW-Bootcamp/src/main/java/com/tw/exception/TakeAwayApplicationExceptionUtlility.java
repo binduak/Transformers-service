@@ -36,4 +36,7 @@ public class TakeAwayApplicationExceptionUtlility {
 	public static final int NO_CATEGORY_FOUND_ERROR_CODE = 1010;
 	public static final String NO_CATEGORY_FOUND_ERROR_MESSAGE ="No Category found";
 	
+	public static final int INVALID_DATE_FORMAT_DOB_ERROR_CODE = 1011;
+	public static final String INVALID_DATE_FORMAT_DOB_ERROR_MESSAGE ="Invalid Date format for DOB";
+	
 }

@@ -24,7 +24,7 @@ public class Buyer extends AbstractEntity<Long>{
 	private long buyerId;
 	@OneToOne (cascade=CascadeType.ALL)
 	@JoinColumn(name="userid", unique= true, nullable=true, insertable=true, updatable=true)
-	private Users userInfo;
+	private Users buyerUserInfo;
 	@Column(name = "gender")
 	private String gender;
 	@Temporal(TemporalType.DATE)
@@ -37,11 +37,12 @@ public class Buyer extends AbstractEntity<Long>{
 	public void setBuyerId(long buyerId) {
 		this.buyerId = buyerId;
 	}
-	public Users getUserInfo() {
-		return userInfo;
+	
+	public Users getBuyerUserInfo() {
+		return buyerUserInfo;
 	}
-	public void setUserInfo(Users userInfo) {
-		this.userInfo = userInfo;
+	public void setBuyerUserInfo(Users buyerUserInfo) {
+		this.buyerUserInfo = buyerUserInfo;
 	}
 	public String getGender() {
 		return gender;

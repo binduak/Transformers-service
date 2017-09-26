@@ -48,8 +48,8 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 	public boolean registerBuyer (Buyer toSaveBuyer) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "registerBuyer");
 		Users toValidateUser = new Users();
-		toValidateUser.setUsername(toSaveBuyer.getUserInfo().getUsername());
-		toValidateUser.setEmailId(toSaveBuyer.getUserInfo().getEmailId());
+		toValidateUser.setUsername(toSaveBuyer.getBuyerUserInfo().getUsername());
+		toValidateUser.setEmailId(toSaveBuyer.getBuyerUserInfo().getEmailId());
 		
 		if (!userDAO.isUsernameOrEmailPresent(toValidateUser)) {
 			buyerDAO.saveBuyer(toSaveBuyer);
@@ -69,8 +69,8 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 	public boolean registerSeller (Seller toSaveSeller) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "registerSeller");
 		Users toValidateUser = new Users();
-		toValidateUser.setUsername(toSaveSeller.getUserInfo().getUsername());
-		toValidateUser.setEmailId(toSaveSeller.getUserInfo().getEmailId());
+		toValidateUser.setUsername(toSaveSeller.getSellerUserInfo().getUsername());
+		toValidateUser.setEmailId(toSaveSeller.getSellerUserInfo().getEmailId());
 		if (!userDAO.isUsernameOrEmailPresent(toValidateUser)) {
 			sellerDAO.saveSeller(toSaveSeller);
 			log.debug(ApplicationUtility.EXIT_METHOD  + "registerSeller");

@@ -27,8 +27,8 @@ public class TestCategoryManagement {
 		});
 		BaseResponse<List<CategoryResponse>> toValidateCategoryListResponse = fetchedResponse.getBody();
 		assertThat(toValidateCategoryListResponse).isNotNull();
-		assertThat(toValidateCategoryListResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_MESSAGE);
-		assertThat(toValidateCategoryListResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCESS_CODE);
+		assertThat(toValidateCategoryListResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
+		assertThat(toValidateCategoryListResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(toValidateCategoryListResponse.getData().size()).isEqualTo(6);
 
 	}
