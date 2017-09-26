@@ -33,5 +33,7 @@ public class TakeAwayApplicationExceptionUtlility {
 	public static final int USERNAME_OR_EMAILID_EXISTS_ERROR_CODE = 1009;
 	public static final String USERNAME_OR_EMAILID_EXISTS_ERROR_MESSAGE ="Username or Emailid already exist in the repo";
 	
+	public static final int NO_CATEGORY_FOUND_ERROR_CODE = 1010;
+	public static final String NO_CATEGORY_FOUND_ERROR_MESSAGE ="No Category found";
 	
 }

@@ -9,4 +9,7 @@ public interface IUserDAO {
 
 	Users getUserLoginInfo(String username, String password);
 
+
+	boolean isUsernameOrEmailPresent(Users toValidateUser);
+
 }
