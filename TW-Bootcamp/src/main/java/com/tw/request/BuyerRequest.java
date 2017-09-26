@@ -1,11 +1,10 @@
 package com.tw.request;
 
-import java.util.Date;
-
 public class BuyerRequest  extends UserRequest{
-
+	
 	private String gender;
-	private Date dateOfBirth;
+	//"yyyy-MM-dd"
+	private String dateOfBirth;
 	
 	public String getGender() {
 		return gender;
@@ -13,10 +12,10 @@ public class BuyerRequest  extends UserRequest{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	

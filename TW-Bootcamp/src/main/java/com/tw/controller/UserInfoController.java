@@ -91,7 +91,7 @@ public class UserInfoController {
 			toSaveUser.setAddress(registerBuyer.getAddress());
 			Buyer toSaveBuyer = new Buyer();
 			toSaveBuyer.setBuyerUserInfo(toSaveUser);
-			toSaveBuyer.setDob(registerBuyer.getDateOfBirth());
+			toSaveBuyer.setDob(ApplicationUtility.convertDOBToDate(registerBuyer.getDateOfBirth()));
 			toSaveBuyer.setGender(registerBuyer.getGender());
 			returnSucessResponse.setData(userService.registerBuyer(toSaveBuyer));
 			returnSucessResponse.setSucessResponse();
