@@ -28,6 +28,9 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 	@Autowired
 	private ISellerDAO sellerDAO;
 	
+	/* (non-Javadoc)
+	 * @see com.tw.service.impl.IUserService#getUserLoginInfo(java.lang.String, java.lang.String)
+	 */
 	@Override
 	@Transactional
 	public Users getUserLoginInfo(String username, String password) {
@@ -37,6 +40,9 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 		return loggedInUserInfo;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.tw.service.impl.IUserService#registerBuyer(com.tw.entity.Buyer)
+	 */
 	@Override
 	@Transactional
 	public boolean registerBuyer (Buyer toSaveBuyer) {
@@ -55,6 +61,9 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.tw.service.impl.IUserService#registerSeller(com.tw.entity.Seller)
+	 */
 	@Override
 	@Transactional
 	public boolean registerSeller (Seller toSaveSeller) {
@@ -71,6 +80,9 @@ private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName
 				TakeAwayApplicationExceptionUtlility.USERNAME_OR_EMAILID_EXISTS_ERROR_CODE);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.tw.service.impl.IUserService#isUsernameOrEmailPresent(com.tw.entity.Users)
+	 */
 	@Override
 	@Transactional
 	public boolean isUsernameOrEmailPresent (Users toValidateUser) {
