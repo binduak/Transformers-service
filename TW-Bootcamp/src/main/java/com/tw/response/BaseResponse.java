@@ -26,8 +26,8 @@ public class BaseResponse <T>{
 		this.data = data;
 	}
 	public void setSucessResponse () {
-		this.responseCode = ApplicationUtility.RESPONSE_SUCESS_CODE;
-		this.responseStatus = ApplicationUtility.RESPONSE_SUCESS_MESSAGE;
+		this.responseCode = ApplicationUtility.RESPONSE_SUCCESS_CODE;
+		this.responseStatus = ApplicationUtility.RESPONSE_SUCCESS_MESSAGE;
 	}
 	
 	public void setFailureResponse () {

@@ -27,7 +27,7 @@ public class Seller extends AbstractEntity<Long>{
 	private long sellerId;
 	@OneToOne (cascade=CascadeType.ALL)
 	@JoinColumn(name="userid", unique= true, nullable=true, insertable=true, updatable=true)
-	private Users userInfo;
+	private Users sellerUserInfo;
 	@Column(name = "experience_in_years")
 	private int experienceYears;
 	@Column(name = "experience_in_months")
@@ -37,11 +37,12 @@ public class Seller extends AbstractEntity<Long>{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "itemOwner")
 	private Set<Items> sellerItemInfo = new HashSet<Items>(0);
 	
-	public Users getUserInfo() {
-		return userInfo;
+	
+	public Users getSellerUserInfo() {
+		return sellerUserInfo;
 	}
-	public void setUserInfo(Users userInfo) {
-		this.userInfo = userInfo;
+	public void setSellerUserInfo(Users sellerUserInfo) {
+		this.sellerUserInfo = sellerUserInfo;
 	}
 	public int getExperienceYears() {
 		return experienceYears;

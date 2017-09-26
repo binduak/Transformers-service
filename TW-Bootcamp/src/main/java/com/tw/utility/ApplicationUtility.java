@@ -7,8 +7,8 @@ public class ApplicationUtility {
 	public static final String NO_RECORD_FOUND = "No Record Found";
 	
 	
-	public static final String RESPONSE_SUCESS_MESSAGE = "Sucess";
-	public static final int RESPONSE_SUCESS_CODE = 0;
+	public static final String RESPONSE_SUCCESS_MESSAGE = "Success";
+	public static final int RESPONSE_SUCCESS_CODE = 0;
 	
 	public static final String RESPONSE_FAILURE_MESSAGE = "Failure";
 	public static final int RESPONSE_FAILURE_CODE = 400;

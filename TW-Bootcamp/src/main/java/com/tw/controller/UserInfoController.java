@@ -41,7 +41,9 @@ public class UserInfoController {
 		try {
 			Users userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
 			if (userInfo !=null) {
-				returnSucessResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber()));
+				boolean isBuyer = false;
+				if (userInfo.getBuyerInfo()!= null && userInfo.getBuyerInfo().getBuyerId() >0) isBuyer =true;
+				returnSucessResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber(),isBuyer));
 				returnSucessResponse.setSucessResponse();
 			}else{
 				returnSucessResponse.setData(null);
@@ -88,8 +90,7 @@ public class UserInfoController {
 			toSaveUser.setUsername(registerBuyer.getUsername());
 			toSaveUser.setAddress(registerBuyer.getAddress());
 			Buyer toSaveBuyer = new Buyer();
-			toSaveBuyer.setUserInfo(toSaveUser);
-			toSaveBuyer.setUserInfo(toSaveUser);
+			toSaveBuyer.setBuyerUserInfo(toSaveUser);
 			toSaveBuyer.setDob(registerBuyer.getDateOfBirth());
 			toSaveBuyer.setGender(registerBuyer.getGender());
 			returnSucessResponse.setData(userService.registerBuyer(toSaveBuyer));
@@ -119,7 +120,7 @@ public class UserInfoController {
 			toSaveUser.setUsername(registerSeller.getUsername());
 			toSaveUser.setAddress(registerSeller.getAddress());
 			Seller toSaveSeller = new Seller();
-			toSaveSeller.setUserInfo(toSaveUser);
+			toSaveSeller.setSellerUserInfo(toSaveUser);
 			toSaveSeller.setExperienceYears(registerSeller.getExperienceYears());
 			toSaveSeller.setExperienceMonths(registerSeller.getExperienceMonths());
 			toSaveSeller.setPanCardNo(registerSeller.getPanCardNo());

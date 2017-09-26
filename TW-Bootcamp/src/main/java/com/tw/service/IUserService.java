@@ -1,7 +1,5 @@
 package com.tw.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tw.entity.Buyer;
 import com.tw.entity.Seller;
 import com.tw.entity.Users;
