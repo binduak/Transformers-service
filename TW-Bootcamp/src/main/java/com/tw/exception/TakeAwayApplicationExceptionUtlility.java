@@ -39,4 +39,10 @@ public class TakeAwayApplicationExceptionUtlility {
 	public static final int INVALID_DATE_FORMAT_DOB_ERROR_CODE = 1011;
 	public static final String INVALID_DATE_FORMAT_DOB_ERROR_MESSAGE ="Invalid Date format for DOB";
 	
+	public static final int INVALID_CATEGORY_INFO_ERROR_CODE = 1012;
+	public static final String INVALID_CATEGORY_INFO_ERROR_MESSAGE ="Invalid Category Details";
+	
+	public static final int NO_ITEM_GIVEN_CATEGORY_ERROR_CODE = 1013;
+	public static final String NO_ITEM_GIVEN_CATEGORY_ERROR_MESSAGE ="No item for this category";
+	
 }

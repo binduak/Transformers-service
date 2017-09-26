@@ -8,4 +8,6 @@ public interface ICategoryDAO {
 
 	List<Category> fecthAllCategory();
 
+	boolean validateCategoryByNameAndId(Category toValidateCateegory);
+
 }

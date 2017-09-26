@@ -2,6 +2,7 @@ package com.tw.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.dao.DataAccessException;
@@ -33,6 +34,29 @@ public class CategoryDAOImpl  extends AbstractEntityDAOImpl <Category, Long> imp
 			throw new DAOException(TakeAwayApplicationExceptionUtlility.NO_CATEGORY_FOUND_ERROR_MESSAGE,
 					TakeAwayApplicationExceptionUtlility.NO_CATEGORY_FOUND_ERROR_CODE);
 
+		}catch (DataAccessException exception) {
+			log.error(exception);
+			throw new DAOException(TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_MESSAGE
+					,TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_CODE,exception);
+		}
+	}
+	
+	@Override
+	public boolean validateCategoryByNameAndId (Category toValidateCateegory) {
+		log.debug(ApplicationUtility.ENTER_METHOD  + "fecthAllCategory");
+		try {
+			Query getCategoryValdiateQuery = getEntityManager().createNamedQuery("validateCategoryByNameAndId");
+			getCategoryValdiateQuery.setParameter("validateCategoryId", toValidateCateegory.getCategoryId());
+			getCategoryValdiateQuery.setParameter("validateCategoryName", toValidateCateegory.getCategoryName());
+			Category fetchedCategory = (Category) getCategoryValdiateQuery.getSingleResult();
+			if (fetchedCategory != null && fetchedCategory.getCategoryId() >0) {
+				log.debug(ApplicationUtility.EXIT_METHOD  + "fecthAllCategory");
+				return true;
+			}
+			return false;
+		}catch (NoResultException noResultException) {
+			log.warn( toValidateCateegory , noResultException);
+			return false;
 		}catch (DataAccessException exception) {
 			log.error(exception);
 			throw new DAOException(TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_MESSAGE

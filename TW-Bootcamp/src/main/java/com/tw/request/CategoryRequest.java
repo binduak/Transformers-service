@@ -1,11 +1,9 @@
-package com.tw.response;
+package com.tw.request;
 
-public class CategoryResponse {
+public class CategoryRequest {
 
-	
 	private long categoryId;
 	private String categoryName;
-	
 	
 	public long getCategoryId() {
 		return categoryId;
@@ -19,6 +17,8 @@ public class CategoryResponse {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	
 	
 	
 }
