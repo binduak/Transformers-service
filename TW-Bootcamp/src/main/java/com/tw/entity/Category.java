@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 @NamedQueries({	
 	@NamedQuery(name = "getAllCategory", query = "from Category c"),
+	@NamedQuery(name = "validateCategoryByNameAndId", query = "from Category c where c.categoryId= :validateCategoryId and categoryName=:validateCategoryName"),
 })
 
 @Entity
@@ -25,17 +26,18 @@ public class Category extends AbstractEntity<Long>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "categoryid")
-	private int categoryId;
+	private long categoryId;
 	@Column(name = "category_name")
 	private String categoryName;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "itemOwner")
 	private List<Items> cateoryItemList = new ArrayList<Items>(0);
 	
 	
-	public int getCategoryId() {
+	
+	public long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getCategoryName() {

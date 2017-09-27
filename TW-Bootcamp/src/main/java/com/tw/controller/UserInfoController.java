@@ -32,49 +32,49 @@ public class UserInfoController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ResponseEntity<BaseResponse<UserInfoResponse>> validateLogin(@RequestBody LoginRequest login) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "validateLogin");
-		BaseResponse<UserInfoResponse> returnSucessResponse = new BaseResponse<>();
+		BaseResponse<UserInfoResponse> returnResponse = new BaseResponse<>();
 		try {
 			Users userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
 			if (userInfo !=null) {
 				boolean isBuyer = false;
 				if (userInfo.getBuyerInfo()!= null && userInfo.getBuyerInfo().getBuyerId() >0) isBuyer =true;
-				returnSucessResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber(),isBuyer));
-				returnSucessResponse.setSucessResponse();
+				returnResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber(),isBuyer));
+				returnResponse.setSucessResponse();
 			}else{
-				returnSucessResponse.setData(null);
-				returnSucessResponse.setFailureResponse();
+				returnResponse.setData(null);
+				returnResponse.setFailureResponse();
 			}
 		}catch (BaseException baseExceptoin) {
-			returnSucessResponse.setResponseCode(baseExceptoin.getErrorCode());
-			returnSucessResponse.setResponseStatus(baseExceptoin.getMessage());
+			returnResponse.setResponseCode(baseExceptoin.getErrorCode());
+			returnResponse.setResponseStatus(baseExceptoin.getMessage());
 		}catch (Exception e) {
-			returnSucessResponse.setFailureResponse();
+			returnResponse.setFailureResponse();
 		}
 		log.debug(ApplicationUtility.ENTER_METHOD  + "validateLogin");
-		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 
 
 	@GetMapping("logout/{username}")
 		public ResponseEntity<BaseResponse<String>> logoutUser(@PathVariable("username") String username) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "logoutUser");
-			BaseResponse<String> returnSucessResponse = new BaseResponse<>();
+			BaseResponse<String> returnResponse = new BaseResponse<>();
 			if (username.equalsIgnoreCase("123")) {
-				returnSucessResponse.setData("User Logged Out Sucessfully");
-				returnSucessResponse.setSucessResponse();
+				returnResponse.setData("User Logged Out Sucessfully");
+				returnResponse.setSucessResponse();
 			}else{
-				returnSucessResponse.setData("Invalid Username to Logout");
-				returnSucessResponse.setFailureResponse();
+				returnResponse.setData("Invalid Username to Logout");
+				returnResponse.setFailureResponse();
 			}
 			log.debug(ApplicationUtility.ENTER_METHOD  + "logoutUser");
-			return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+			return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 		}
 	
 	
 	@RequestMapping(value = "registerBuyer", method = RequestMethod.POST)
 	public ResponseEntity<BaseResponse<Boolean>> registerBuyer(@RequestBody BuyerRequest registerBuyer) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "registerBuyer");
-		BaseResponse<Boolean> returnSucessResponse = new BaseResponse<>();
+		BaseResponse<Boolean> returnResponse = new BaseResponse<>();
 		try {
 			Users toSaveUser = new Users();
 			toSaveUser.setAddress(registerBuyer.getAddress());
@@ -88,23 +88,23 @@ public class UserInfoController {
 			toSaveBuyer.setBuyerUserInfo(toSaveUser);
 			toSaveBuyer.setDob(ApplicationUtility.convertDOBToDate(registerBuyer.getDateOfBirth()));
 			toSaveBuyer.setGender(registerBuyer.getGender());
-			returnSucessResponse.setData(userService.registerBuyer(toSaveBuyer));
-			returnSucessResponse.setSucessResponse();
+			returnResponse.setData(userService.registerBuyer(toSaveBuyer));
+			returnResponse.setSucessResponse();
 		}catch (BaseException baseExceptoin) {
-			returnSucessResponse.setResponseCode(baseExceptoin.getErrorCode());
-			returnSucessResponse.setResponseStatus(baseExceptoin.getMessage());
+			returnResponse.setResponseCode(baseExceptoin.getErrorCode());
+			returnResponse.setResponseStatus(baseExceptoin.getMessage());
 		}catch (Exception e) {
-			returnSucessResponse.setFailureResponse();
+			returnResponse.setFailureResponse();
 		}
 		
 		log.debug(ApplicationUtility.EXIT_METHOD  + "registerBuyer");
-		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "registerSeller", method = RequestMethod.POST)
 	public ResponseEntity<BaseResponse<Boolean>> registerBuyer(@RequestBody SellerRequest registerSeller) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "registerSeller");
-		BaseResponse<Boolean> returnSucessResponse = new BaseResponse<>();
+		BaseResponse<Boolean> returnResponse = new BaseResponse<>();
 		try {
 			Users toSaveUser = new Users();
 			toSaveUser.setAddress(registerSeller.getAddress());
@@ -119,38 +119,38 @@ public class UserInfoController {
 			toSaveSeller.setExperienceYears(registerSeller.getExperienceYears());
 			toSaveSeller.setExperienceMonths(registerSeller.getExperienceMonths());
 			toSaveSeller.setPanCardNo(registerSeller.getPanCardNo());
-			returnSucessResponse.setData(userService.registerSeller(toSaveSeller));
-			returnSucessResponse.setSucessResponse();
+			returnResponse.setData(userService.registerSeller(toSaveSeller));
+			returnResponse.setSucessResponse();
 		}catch (BaseException baseExceptoin) {
-			returnSucessResponse.setResponseCode(baseExceptoin.getErrorCode());
-			returnSucessResponse.setResponseStatus(baseExceptoin.getMessage());
+			returnResponse.setResponseCode(baseExceptoin.getErrorCode());
+			returnResponse.setResponseStatus(baseExceptoin.getMessage());
 		}catch (Exception e) {
-			returnSucessResponse.setFailureResponse();
+			returnResponse.setFailureResponse();
 		}
 		
 		log.debug(ApplicationUtility.EXIT_METHOD  + "registerSeller");
-		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "isUsernameOrEmailPresent", method = RequestMethod.POST)
 	public ResponseEntity<BaseResponse<Boolean>> isUsernameOrEmailPresent( @RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "emailId", required = false) String emailId) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "isUserPresent");
-		BaseResponse<Boolean> returnSucessResponse = new BaseResponse<>();
+		BaseResponse<Boolean> returnResponse = new BaseResponse<>();
 		try {
 			Users toValidateUser = new Users();
 			toValidateUser.setUsername(username);
 			toValidateUser.setEmailId(emailId);
-			returnSucessResponse.setData(userService.isUsernameOrEmailPresent(toValidateUser));
-			returnSucessResponse.setSucessResponse();
+			returnResponse.setData(userService.isUsernameOrEmailPresent(toValidateUser));
+			returnResponse.setSucessResponse();
 		}catch (BaseException baseExceptoin) {
-			returnSucessResponse.setResponseCode(baseExceptoin.getErrorCode());
-			returnSucessResponse.setResponseStatus(baseExceptoin.getMessage());
+			returnResponse.setResponseCode(baseExceptoin.getErrorCode());
+			returnResponse.setResponseStatus(baseExceptoin.getMessage());
 		}catch (Exception e) {
-			returnSucessResponse.setFailureResponse();
+			returnResponse.setFailureResponse();
 		}
 		
 		log.debug(ApplicationUtility.EXIT_METHOD  + "isUserPresent");
-		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 }

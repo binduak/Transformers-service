@@ -2,7 +2,7 @@ package com.tw.dao;
 
 import com.tw.entity.Users;
 
-public interface IUserDAO {
+public interface IUserDAO extends IAbstractEntityDAO<Users, Long>{
 
 	void saveUser(Users toSaveUser);
 
