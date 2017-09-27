@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tw.entity.Category;
 import com.tw.entity.Items;
 import com.tw.entity.Seller;
 import com.tw.entity.Users;
 import com.tw.exception.BaseException;
-import com.tw.request.CategoryRequest;
 import com.tw.request.ItemCreateRequest;
 import com.tw.response.BaseResponse;
 import com.tw.response.ItemInfoResponse;
@@ -30,12 +33,6 @@ public class ItemInfoController {
 	@Autowired
 	IItemService itemService;
 	
-	/*@RequestMapping(value = "/getImage/{id}", method=RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	public ResponseEntity<byte[]> showImageOnId(@PathVariable("id") String id) throws IOException {
-		byte[] imageBytes = Files.readAllBytes(Paths.get("src/main/resources/images/headphone.jpg"));
-		return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType( MediaType.IMAGE_JPEG_VALUE))).body(imageBytes);
-	}*/
-
 	@RequestMapping(value = "items", method = RequestMethod.GET)
 	public ResponseEntity<BaseResponse<List<ItemInfoResponse>>> getAllProductInfo (@RequestParam("categoryId") Integer categoryId, @RequestParam("categoryName") String categoryName) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "getAllProductInfo");
