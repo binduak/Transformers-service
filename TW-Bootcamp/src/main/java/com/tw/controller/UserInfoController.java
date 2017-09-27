@@ -36,9 +36,16 @@ public class UserInfoController {
 		try {
 			Users userInfo = userService.getUserLoginInfo(login.getUsername(), login.getPassword());
 			if (userInfo !=null) {
-				boolean isBuyer = false;
-				if (userInfo.getBuyerInfo()!= null && userInfo.getBuyerInfo().getBuyerId() >0) isBuyer =true;
-				returnResponse.setData(new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber(),isBuyer));
+				UserInfoResponse loggedUserInfo = new UserInfoResponse(userInfo.getName(),userInfo.getEmailId(),userInfo.getUsername(),userInfo.getAddress(),userInfo.getMobileNumber());
+				if (userInfo.getBuyerInfo()!= null && userInfo.getBuyerInfo().getBuyerId() >0) {
+					returnResponse.setData(loggedUserInfo);
+					loggedUserInfo.setBuyer(true);
+					loggedUserInfo.setUserTypeId(userInfo.getBuyerInfo().getBuyerId());
+				}else {
+					loggedUserInfo.setBuyer(false);
+					loggedUserInfo.setUserTypeId(userInfo.getSellerUserInfo().getSellerId());
+				}
+				returnResponse.setData(loggedUserInfo);
 				returnResponse.setSucessResponse();
 			}else{
 				returnResponse.setData(null);

@@ -34,6 +34,10 @@ public class TestUserManagement {
 		BaseResponse<UserInfoResponse> loginResponse = restTemplate.postForObject(LOGIN_URL, loginRequest, BaseResponse.class);
 		assertThat(loginResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
 		assertThat(loginResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
+		//assertThat(loginResponse.getData()).isNotNull();
+		//UserInfoResponse loggedUserInfo = loginResponse.getData();
+		//assertThat(loggedUserInfo.isBuyer()).isTrue();
+		//assertThat(loggedUserInfo.getUserTypeId()).isEqualTo(1);
 	}
 	
 	public void testSellerValidLogin() {
@@ -46,6 +50,7 @@ public class TestUserManagement {
 		BaseResponse<UserInfoResponse> loginResponse = restTemplate.postForObject(LOGIN_URL, loginRequest, BaseResponse.class);
 		assertThat(loginResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
 		assertThat(loginResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
+		//assertThat(loginResponse.getData()).isNotNull();
 	}
 
 	public void testUserInValidLogin() {
@@ -192,15 +197,15 @@ public class TestUserManagement {
 
 	public static void main(String args[]) {
 		TestUserManagement userManageTest = new TestUserManagement();
-		/*userManageTest.testBuyerValidLogin();
+		userManageTest.testBuyerValidLogin();
 		userManageTest.testSellerValidLogin();
-		userManageTest.testUserInValidLogin();
+		/*userManageTest.testUserInValidLogin();
 		userManageTest.testValidUsernameAndEmailIdPresent ();
 		userManageTest.testInValidUsernamePresent();
 		userManageTest.testInValidEmailIdPresent ();
 		userManageTest.testInValidUserNameOrValidEmailIdPresent();
 		userManageTest.testInValidBuyerDuplicateEmailId();
-		userManageTest.testCreateValidSeller();*/
-		userManageTest.testCreateValidBuyer();
+		userManageTest.testCreateValidSeller();
+		userManageTest.testCreateValidBuyer();*/
 	}
 }

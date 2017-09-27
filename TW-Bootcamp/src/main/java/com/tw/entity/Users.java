@@ -39,6 +39,9 @@ public class Users extends AbstractEntity<Long>{
 	@OneToOne(mappedBy = "buyerUserInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private Buyer buyerInfo;
 	
+	@OneToOne(mappedBy = "sellerUserInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Seller sellerUserInfo;
+	
 	public long getUserId() {
 		return userId;
 	}
@@ -86,6 +89,12 @@ public class Users extends AbstractEntity<Long>{
 	}
 	public void setBuyerInfo(Buyer buyerInfo) {
 		this.buyerInfo = buyerInfo;
+	}
+	public Seller getSellerUserInfo() {
+		return sellerUserInfo;
+	}
+	public void setSellerUserInfo(Seller sellerUserInfo) {
+		this.sellerUserInfo = sellerUserInfo;
 	}
 	
 	

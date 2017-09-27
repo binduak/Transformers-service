@@ -8,17 +8,16 @@ public class UserInfoResponse {
 	private String address;
 	private String mobileNumber;
 	private boolean isBuyer;
-	
+	private long userTypeId; 
 
-	public UserInfoResponse(String name, String emailId, String username, String address, String mobileNumber,
-			boolean isBuyer) {
+	
+	public UserInfoResponse(String name, String emailId, String username, String address, String mobileNumber) {
 		super();
 		this.name = name;
 		this.emailId = emailId;
 		this.username = username;
 		this.address = address;
 		this.mobileNumber = mobileNumber;
-		this.isBuyer = isBuyer;
 	}
 	public String getName() {
 		return name;
@@ -56,6 +55,13 @@ public class UserInfoResponse {
 	public void setBuyer(boolean isBuyer) {
 		this.isBuyer = isBuyer;
 	}
+	public long getUserTypeId() {
+		return userTypeId;
+	}
+	public void setUserTypeId(long userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+	
 	
 	
 }
