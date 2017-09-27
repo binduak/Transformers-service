@@ -45,4 +45,7 @@ public class TakeAwayApplicationExceptionUtlility {
 	public static final int NO_ITEM_GIVEN_CATEGORY_ERROR_CODE = 1013;
 	public static final String NO_ITEM_GIVEN_CATEGORY_ERROR_MESSAGE ="No item for this category";
 	
+	public static final int INVALID_CATEGORY_OR_SELLER_INFO_ERROR_CODE = 1014;
+	public static final String INVALID_CATEGORY_OR_SELLER_INFO_ERROR_MESSAGE ="Invalid Seller or Category information";
+	
 }

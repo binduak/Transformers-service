@@ -5,8 +5,10 @@ import java.util.List;
 import com.tw.entity.Category;
 import com.tw.entity.Items;
 
-public interface IItemDAO {
+public interface IItemDAO extends IAbstractEntityDAO<Items, Long> {
 
 	List<Items> getItemsByCategory(Category category);
+
+	void saveItem(Items toSaveItems);
 
 }

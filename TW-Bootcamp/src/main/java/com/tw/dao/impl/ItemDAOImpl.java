@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+
 import com.tw.dao.IItemDAO;
 import com.tw.entity.Category;
 import com.tw.entity.Items;
@@ -19,7 +20,19 @@ public class ItemDAOImpl extends AbstractEntityDAOImpl <Items, Long> implements 
 
 	static Logger log = Logger.getLogger(ItemDAOImpl.class.getName());
 	
-	
+	@Override
+	public void saveItem(Items toSaveItems) {
+		log.debug(ApplicationUtility.ENTER_METHOD  + "saveItem");
+		try {
+			super.save(toSaveItems);
+		} catch (DataAccessException exception) {
+			log.error(exception);
+			throw new DAOException(TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_MESSAGE
+					,TakeAwayApplicationExceptionUtlility.DATABASE_ERROR_CODE,exception);
+		}
+		
+		log.debug(ApplicationUtility.EXIT_METHOD + "saveSeller");
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.tw.dao.impl.IItemDAO#getItemsByCategory(com.tw.entity.Category)

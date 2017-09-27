@@ -32,7 +32,7 @@ public class CategoryController {
 	@GetMapping("getAllCategory")
 	public ResponseEntity<BaseResponse<List<CategoryResponse>>> getAllCategoryInfo() {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "getAllCategoryInfo");
-		BaseResponse<List<CategoryResponse>> returnSucessResponse = new BaseResponse<>();
+		BaseResponse<List<CategoryResponse>> returnResponse = new BaseResponse<>();
 		try {
 			List<Category> fecthAllCategory = categoryService.fecthAllCategory();
 			List<CategoryResponse> returnCategoryResponseList = new ArrayList<>();
@@ -42,15 +42,15 @@ public class CategoryController {
 				categoryResponse.setCategoryName(category.getCategoryName());
 				returnCategoryResponseList.add(categoryResponse);
 			}
-			returnSucessResponse.setData(returnCategoryResponseList);
-			returnSucessResponse.setSucessResponse();
+			returnResponse.setData(returnCategoryResponseList);
+			returnResponse.setSucessResponse();
 		}catch (BaseException baseExceptoin) {
-			returnSucessResponse.setResponseCode(baseExceptoin.getErrorCode());
-			returnSucessResponse.setResponseStatus(baseExceptoin.getMessage());
+			returnResponse.setResponseCode(baseExceptoin.getErrorCode());
+			returnResponse.setResponseStatus(baseExceptoin.getMessage());
 		}catch (Exception e) {
-			returnSucessResponse.setFailureResponse();
+			returnResponse.setFailureResponse();
 		}
 		log.debug(ApplicationUtility.ENTER_METHOD  + "getAllCategoryInfo");
-		return new ResponseEntity<>(returnSucessResponse, HttpStatus.OK);
+		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 }
