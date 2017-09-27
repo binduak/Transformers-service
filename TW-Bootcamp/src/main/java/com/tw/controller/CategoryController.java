@@ -20,7 +20,6 @@ import com.tw.service.ICategoryService;
 import com.tw.utility.ApplicationUtility;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("category")
 @Controller
 public class CategoryController {
 
@@ -28,9 +27,7 @@ public class CategoryController {
 	
 	@Autowired
 	ICategoryService categoryService;
-	
-	//@RequestMapping(value = "getAllCategory", method = RequestMethod.POST)
-	@GetMapping("getAllCategory")
+	@GetMapping("categories")
 	public ResponseEntity<BaseResponse<List<CategoryResponse>>> getAllCategoryInfo() {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "getAllCategoryInfo");
 		BaseResponse<List<CategoryResponse>> returnResponse = new BaseResponse<>();
