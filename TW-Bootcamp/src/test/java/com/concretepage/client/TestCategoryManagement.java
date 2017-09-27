@@ -17,8 +17,8 @@ import com.tw.utility.ApplicationUtility;
 
 public class TestCategoryManagement {
 
-	final String BASE_URL = "http://localhost:8080/category/";
-	final String GET_CATEGORY_URL = "getAllCategory";
+	final String BASE_URL = "http://localhost:8080/";
+	final String GET_CATEGORY_URL = "categories";
 	public void testGetAllCategory () {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);

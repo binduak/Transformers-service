@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.tw.entity.Category;
 import com.tw.entity.Items;
@@ -24,7 +22,7 @@ import com.tw.response.ItemInfoResponse;
 import com.tw.service.IItemService;
 import com.tw.utility.ApplicationUtility;
 
-@RequestMapping("item")
+@CrossOrigin(origins = "*")
 @Controller
 public class ItemInfoController {
 
@@ -37,15 +35,15 @@ public class ItemInfoController {
 		byte[] imageBytes = Files.readAllBytes(Paths.get("src/main/resources/images/headphone.jpg"));
 		return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType( MediaType.IMAGE_JPEG_VALUE))).body(imageBytes);
 	}*/
-	
-	@RequestMapping(value = "getAllItemByCategory", method = RequestMethod.POST)
-	public ResponseEntity<BaseResponse<List<ItemInfoResponse>>> getAllProductInfo (@RequestBody CategoryRequest categoryRequest ) {
+
+	@RequestMapping(value = "items", method = RequestMethod.GET)
+	public ResponseEntity<BaseResponse<List<ItemInfoResponse>>> getAllProductInfo (@RequestParam("categoryId") Integer categoryId, @RequestParam("categoryName") String categoryName) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "getAllProductInfo");
 		BaseResponse<List<ItemInfoResponse>> returnResponse = new BaseResponse<>();
 		try {
 			Category fetchByCategory = new Category();
-			fetchByCategory.setCategoryId(categoryRequest.getCategoryId());
-			fetchByCategory.setCategoryName(categoryRequest.getCategoryName());
+			fetchByCategory.setCategoryId(categoryId);
+			fetchByCategory.setCategoryName(categoryName);
 			//fetchAllItemsByCategory
 			List<Items> fetchAllItemsByCategory = itemService.fetchAllItemsByCategory(fetchByCategory);
 			List<ItemInfoResponse> itemInfoResponses = new ArrayList<ItemInfoResponse>();
@@ -73,7 +71,7 @@ public class ItemInfoController {
 		return new ResponseEntity<>(returnResponse, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "sellerCreateItemByCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "items", method = RequestMethod.POST)
 	public ResponseEntity<BaseResponse<Boolean>> sellerCreateItemByCategory (@RequestBody ItemCreateRequest itemCreateRequest) {
 		log.debug(ApplicationUtility.ENTER_METHOD  + "sellerCreateItemByCategory");
 		BaseResponse<Boolean> returnResponse = new BaseResponse<>();

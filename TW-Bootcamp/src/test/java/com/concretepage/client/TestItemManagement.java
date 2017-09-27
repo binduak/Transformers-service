@@ -18,17 +18,14 @@ import com.tw.utility.ApplicationUtility;
 @SuppressWarnings("unchecked")
 public class TestItemManagement {
 
-	final String BASE_URL = "http://localhost:8080/item/";
-	final String GET_ITEM_BY_CATEGORY_URL = "getAllItemByCategory";
-	final String SELLER_CREATE_ITEM_BY_CATEGORY_URL="sellerCreateItemByCategory";
+	final String BASE_URL = "http://localhost:8080/";
+	final String GET_ITEM_BY_CATEGORY_URL = "items";
+	final String SELLER_CREATE_ITEM_BY_CATEGORY_URL="items";
 	public void testGetAllItemByCategory () {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		RestTemplate restTemplate = new RestTemplate();
-		CategoryRequest categoryRequest = new CategoryRequest();
-		categoryRequest.setCategoryId(1);
-		categoryRequest.setCategoryName("Textile");
-		BaseResponse<List<ItemInfoResponse>> getItemListByCategoryResponse = restTemplate.postForObject(BASE_URL+GET_ITEM_BY_CATEGORY_URL, categoryRequest, BaseResponse.class);
+		BaseResponse<List<ItemInfoResponse>> getItemListByCategoryResponse = restTemplate.getForObject((BASE_URL+GET_ITEM_BY_CATEGORY_URL+"?categoryId=1&categoryName=Textile"), BaseResponse.class);
 		assertThat(getItemListByCategoryResponse.getResponseStatus()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_MESSAGE);
 		assertThat(getItemListByCategoryResponse.getResponseCode()).isEqualTo(ApplicationUtility.RESPONSE_SUCCESS_CODE);
 		assertThat(getItemListByCategoryResponse.getData().size()).isEqualTo(3);
@@ -41,10 +38,7 @@ public class TestItemManagement {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		RestTemplate restTemplate = new RestTemplate();
-		CategoryRequest categoryRequest = new CategoryRequest();
-		categoryRequest.setCategoryId(100);
-		categoryRequest.setCategoryName("Textileqe23");
-		BaseResponse<List<ItemInfoResponse>> getItemListByCategoryResponse = restTemplate.postForObject(BASE_URL+GET_ITEM_BY_CATEGORY_URL, categoryRequest, BaseResponse.class);
+		BaseResponse<List<ItemInfoResponse>> getItemListByCategoryResponse = restTemplate.getForObject(BASE_URL+GET_ITEM_BY_CATEGORY_URL+"?categoryId=100&categoryName=Textileqe23", BaseResponse.class);
 		assertThat(getItemListByCategoryResponse.getResponseStatus()).isEqualTo(TakeAwayApplicationExceptionUtlility.INVALID_CATEGORY_INFO_ERROR_MESSAGE);
 		assertThat(getItemListByCategoryResponse.getResponseCode()).isEqualTo(TakeAwayApplicationExceptionUtlility.INVALID_CATEGORY_INFO_ERROR_CODE);
 		List<ItemInfoResponse> toValidateItemListResponse = getItemListByCategoryResponse.getData();
